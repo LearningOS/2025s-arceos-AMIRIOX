@@ -3,8 +3,10 @@
 score=0
 
 if ./scripts/test-print.sh ; then
+    echo 'test-print ok'
     ((score += 100))
 fi
+
 
 if ./scripts/test-ramfs_rename.sh ; then
     ((score += 100))
@@ -15,6 +17,7 @@ if ./scripts/test-alt_alloc.sh ; then
 fi
 
 if ./scripts/test-support_hashmap.sh ; then
+    echo 'hashmap ok'
     ((score += 100))
 fi
 

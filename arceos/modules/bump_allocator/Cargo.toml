@@ -12,3 +12,5 @@ categories.workspace = true
 
 [dependencies]
 allocator = { git = "https://github.com/arceos-org/allocator.git", tag ="v0.1.0", features = ["bitmap"] }
+axconfig = { workspace = true }
+memory_addr = "0.3"
