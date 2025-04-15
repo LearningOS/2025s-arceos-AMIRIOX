@@ -42,6 +42,7 @@ impl VfsNodeOps for FileNode {
     }
 
     fn write_at(&self, offset: u64, buf: &[u8]) -> VfsResult<usize> {
+
         let offset = offset as usize;
         let mut content = self.content.write();
         if offset + buf.len() > content.len() {
@@ -52,5 +53,9 @@ impl VfsNodeOps for FileNode {
         Ok(buf.len())
     }
 
+    // rename in DirNode
+
+    // ramfs doesn't need open
+    // data in ram (Vec<u8>
     impl_vfs_non_dir_default! {}
 }

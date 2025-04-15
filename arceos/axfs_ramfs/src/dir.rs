@@ -42,6 +42,7 @@ impl DirNode {
 
     /// Creates a new node with the given name and type in this directory.
     pub fn create_node(&self, name: &str, ty: VfsNodeType) -> VfsResult {
+        log::debug!("should call dir::create_node");
         if self.exist(name) {
             log::error!("AlreadyExists {}", name);
             return Err(VfsError::AlreadyExists);
@@ -164,7 +165,31 @@ impl VfsNodeOps for DirNode {
             self.remove_node(name)
         }
     }
+    fn rename(&self, src_path: &str, dst_path: &str) -> VfsResult {
+        let (src_file, _) = split_path(src_path);
+        /*
+        if let Some(nxt) = nxt {
+            self.children.write().get(cur).ok_or(VfsError::NotFound)?.rename(nxt, dst_path)
+        } else {
+        */
+        let target = self
+            .children
+            .write()
+            .remove_entry(src_file)
+            .ok_or(VfsError::NotFound)?;
 
+        let dst_path = dst_path.trim_start_matches("/tmp");
+        // /f2
+
+        let (dst, _) = split_path(dst_path);
+        // f2 None
+
+        let cloned = dst.clone();
+        self.children.write().insert(dst.into(), target.1);
+        log::debug!("rename ok, to: /tmp/{}", cloned);
+        Ok(())
+        // }
+    }
     axfs_vfs::impl_vfs_dir_default! {}
 }
 

@@ -18,6 +18,7 @@ pub(crate) fn devfs() -> Arc<fs::devfs::DeviceFileSystem> {
 
 #[cfg(feature = "ramfs")]
 pub(crate) fn ramfs() -> Arc<fs::ramfs::RamFileSystem> {
+    // panic!("你不准 mount ramfs");
     Arc::new(fs::ramfs::RamFileSystem::new())
 }
 

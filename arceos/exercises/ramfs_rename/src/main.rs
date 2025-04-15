@@ -41,6 +41,7 @@ fn process() -> io::Result<()> {
     create_file("/tmp/f1", "hello")?;
     // Just rename, NOT move.
     // So this must happen in the same directory.
+    println!("create file ok");
     rename_file("/tmp/f1", "/tmp/f2")?;
     print_file("/tmp/f2")
 }
