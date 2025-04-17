@@ -13,6 +13,7 @@ use crate::backend::Backend;
 use crate::paging_err_to_ax_err;
 use crate::mapping_err_to_ax_err;
 use alloc::vec::Vec;
+use axlog::ax_println;
 
 /// The virtual memory address space.
 pub struct AddrSpace {
@@ -152,6 +153,8 @@ impl AddrSpace {
         }
 
         let area = MemoryArea::new(start, size, flags, Backend::new_alloc(populate));
+        
+        ax_println!("until here is ok");
         self.areas
             .map(area, &mut self.pt, false)
             .map_err(mapping_err_to_ax_err)?;
